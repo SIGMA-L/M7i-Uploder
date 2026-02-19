@@ -1,0 +1,27 @@
+name = "file-uploader"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# ─── R2 Bucket ────────────────────────────────────────────────────────────────
+# 事前に `wrangler r2 bucket create your-bucket-name` で作成してください
+[[r2_buckets]]
+binding = "R2_BUCKET"
+bucket_name = "your-bucket-name"
+
+# ─── 環境変数 ─────────────────────────────────────────────────────────────────
+# 機密情報は `wrangler secret put <KEY>` コマンドで設定することを推奨
+# (以下は開発用の例 — 本番では必ず wrangler secret を使用してください)
+[vars]
+# AUTH_USERNAME と AUTH_PASSWORD は wrangler secret で設定してください
+# SLACK_WEBHOOK_URL  は wrangler secret で設定してください
+# R2_PUBLIC_URL: R2バケットのパブリックアクセスURLを設定 (任意)
+#   例: "https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev"
+#   ※ Cloudflare ダッシュボードの R2 → バケット → Settings → Public Access で有効化
+R2_PUBLIC_URL = "https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev"
+
+# ─── ローカル開発用 (.dev.vars ファイルを別途作成推奨) ────────────────────────
+# .dev.vars ファイル例:
+#   AUTH_USERNAME=admin
+#   AUTH_PASSWORD=yourpassword
+#   SLACK_WEBHOOK_URL=https://hooks.slack.com/services/xxx/yyy/zzz
+#   R2_PUBLIC_URL=https://pub-xxxx.r2.dev
